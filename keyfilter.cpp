@@ -92,8 +92,13 @@ KeyFilter::KeyFilter(QObject *parent)
 
             quint16 code = buffer[i].code;
             qint32 value = buffer[i].value;
+            bool pressed = value != 0;
+            bool autorepeat = value == 2;
 
-            if (value != 0)
+            if (pressed && autorepeat)
+                continue;
+
+            if (pressed)
                 Q_EMIT keyPressed(code);
             else
                 Q_EMIT keyReleased(code);
