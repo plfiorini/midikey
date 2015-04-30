@@ -44,9 +44,6 @@ int main(int argc, char *argv[])
     QObject::connect(keyFilter, &KeyFilter::keyPressed, [midiOut](quint16 keyCode) {
         midiOut->noteOn(keyCode, 0, 127);
     });
-    QObject::connect(keyFilter, &KeyFilter::keyReleased, [midiOut](quint16 keyCode) {
-        midiOut->noteOff(keyCode, 0);
-    });
 
     QObject::connect(&a, &QCoreApplication::aboutToQuit, [&] {
         midiOut->stopAll();
