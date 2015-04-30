@@ -48,5 +48,9 @@ int main(int argc, char *argv[])
         midiOut->noteOff(keyCode, 0);
     });
 
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, [&] {
+        midiOut->stopAll();
+    });
+
     return a.exec();
 }
